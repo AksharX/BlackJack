@@ -99,12 +99,3 @@ class TestRandomAccurary:
     
           
             
-
-
-generator = Deck_Generator(4)
-deck = generator.deck
-deck.shuffle()
-
-t = TestRandomAccurary(deck,5000)
-
-
