@@ -47,6 +47,8 @@ class Deck:
             self.__deck[i] = temp        
 
     def deal_card(self):
+        if len(self.__deck) == 0:
+            return None
         c = self.__deck.pop()
         self.__discard_Pile.append(c) 
         return c
@@ -98,4 +100,3 @@ class TestRandomAccurary:
         print(len(self.cardsDic))
     
           
-            

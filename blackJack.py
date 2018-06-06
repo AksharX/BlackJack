@@ -1,16 +1,12 @@
 from deck import Deck_Generator
 from pprint import pprint
+from tabulate import tabulate
 
 deck_Gen = Deck_Generator(4)
 deck = deck_Gen.deck
 
 class Hand:
-    hand = {
-        1:{
-            "Cards":[],
-            "Hand Total":0
-        }
-    }
+    hand = {}
     def __init__(self):
         pass
     def addCard(self,card,handNum):
@@ -22,6 +18,14 @@ class Hand:
         else:
             self.hand[handNum]["Cards"].append(card)
             self.hand[handNum]["Hand_Total"] = self.calculateCardTotal(self.hand[handNum]["Cards"])
+    def __str__(self):
+        handList = []
+        for h in self.hand:
+            handList.append("\n".join(str(c) for c in h["Cards"]))
+        return tabulate(handList)
+        
+        
+            
 
             
     def calculateCardTotal(self,cards):
@@ -36,27 +40,25 @@ class Hand:
         if total > 21 and Aces_Count > 0:
             for x in range(Aces_Count):
                 total -= 10
-        
+    
 
 
 class BasePlayer:
-    hand = []
+    hand = None
     deck = None
     def __init__(self,__deck):
         self.deck = __deck
-        hand = Hand()
-    def addCard(self,card):
-        self.cards.append(card)
-    def hit(self):
+        self.hand = Hand()
+    def hit(self,handNum):
         c = self.deck.deal_card()
         if c == None:
             self.deck.shuffle()
-        self.cards.append(c)
+        self.hand.addCard(c,handNum)
     def stay(self):
         pass
 
     def __str__(self):
-        return "\n".join(self.cards)
+        return str(self.hand)
 
 class Dealer(BasePlayer):
 
