@@ -11,7 +11,7 @@ class Card:
         self.__suit = suit
         self.__value = value
 
-    def __str__(self):
+    def __repr__(self):
         if self.__value == 11:
             return "Jack of " + self.__suit 
         elif self.__value == 12:
@@ -25,7 +25,7 @@ class Card:
         
     def value(self):
         if self.__value == 14:
-            return (1,11)
+            return 14
         elif self.__value > 10:
             return (10)
         else:
@@ -54,7 +54,7 @@ class Deck:
         return c
         
 
-    def __str__(self):
+    def __repr__(self):
         deck_Print = ""
         for c in self.__deck:
             deck_Print = deck_Print  + str(c) + "\n"
@@ -85,7 +85,7 @@ class TestRandomAccurary:
     cardsDic = {}
     def __init__(self,deck,NumTests):
         
-        for x in range(NumTests):
+        for _ in range(NumTests):
             c = str(deck.deal_card())
             if c in self.cardsDic:
                 self.cardsDic[c]["Num_Appeared"] += 1
